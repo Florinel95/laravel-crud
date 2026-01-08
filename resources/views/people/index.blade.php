@@ -1,4 +1,4 @@
-<h2>Adaugă persoană</h2>
+<h2>Adauga persoana</h2>
 
 <form action="/people" method="POST">
     @csrf

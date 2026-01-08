@@ -10,4 +10,3 @@ class Person extends Model
 
     protected $fillable = ['age', 'job'];
 }
-git 
