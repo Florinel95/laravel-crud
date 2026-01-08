@@ -1,0 +1,70 @@
+services:
+  web:
+    build:
+      context: ./docker/8.4
+      dockerfile: Dockerfile
+      args:
+        WWWGROUP: '${WWWGROUP}'
+    image: sail-8.4/app
+    container_name: '${PROJECT_NAME}_web'
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    hostname: krb
+    expose:
+      - '81'
+      - '80'
+    ports:
+      - '${APP_PORT:-81}:80'
+    environment:
+      WWWUSER: '${WWWUSER}'
+      LARAVEL_SAIL: 1
+      XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
+      XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
+    volumes:
+      - '.:/var/www/html'
+    networks:
+      - local
+    depends_on:
+      - mysql
+  mysql:
+    image: 'mariadb:10.6'
+    container_name: '${PROJECT_NAME}_mysql'
+    ports:
+      - '${FORWARD_DB_PORT:-3307}:3306'
+    hostname: krbmysql
+    environment:
+      MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_DATABASE: '${DB_DATABASE}'
+      MYSQL_USER: '${DB_USERNAME}'
+      MYSQL_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    volumes:
+      - 'sailmysql:/var/lib/mysql'
+    networks:
+      - local
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-p${DB_PASSWORD}']
+      retries: 3
+      timeout: 5s
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: '${PROJECT_NAME}_phpmyadmin'
+    networks:
+      - local
+    environment:
+      PMA_HOST: krbmysql
+      UPLOAD_LIMIT: '512M'
+      PMA_USER: '${DB_USERNAME}'
+      PMA_PASSWORD: '${DB_PASSWORD}'
+    ports:
+      - '${FORWARD_PMA_PORT:-8081}:80'
+    hostname: krbpma
+
+networks:
+  local:
+    name: local
+    driver: bridge
+volumes:
+  sailmysql:
+    driver: local
