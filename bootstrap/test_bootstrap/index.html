@@ -185,10 +185,10 @@
         </div>
     </section>
     <section class="bg-secondary py-5">
-        <h2 class="text-center mb-5">Recomandari</h2>
+        <h2 class="text-center mb-5">Recomandari </h2>
         <div class="container">
             <div class="row justify-content-center g-4">
-                <div class="card col-lg-3 col-md-5 mt-4">
+                <div class="card col-lg-3 col-md-5 mb-4">
                     <img class="card-img-top" src="https://cdn.pixabay.com/photo/2023/06/29/10/33/lion-8096155_640.png"
                         alt="persoana">
                     <div class="card-body">
@@ -288,9 +288,49 @@
 
         </div>
     </section>
+    <section class="bg-dark text-white py-5">
+        <h2 class="text-center mb-5">Despre mine</h2>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 offset-lg-1">
+                    <img class="img-fluid" src="https://cdn.pixabay.com/photo/2023/06/29/10/33/lion-8096155_640.png"
+                        alt="">
+
+                </div>
+                <div class="col-lg-7 offset-lg-1">
+                    <h5>Salut, sunt Florinel</h5>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio quas magnam, maiores sunt, ad
+                        perferendis ab incidunt labore vitae dolorum nostrum! Voluptates, repellat recusandae.
+                        em ipsum dolor sit, amet consectetur adipisicing elit. Odio quas magnam, maiores sunt, ad
+                        perferendis ab incidunt labore vitae dolorum nostrum! Voluptates, repellat recusandae </p>
+                    <button type="button" class="btn btn-lg btn-success" data-bs-toggle="popover" title="Popover title"
+                        data-bs-content="And here's some amazing content. It's very engaging. Right?">Surpriza</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="bg-light py-5">
+        <div class="container">
+            <h2 class="mb-5">Contact</h2>
+            <address>
+                str. Flr <br>
+                Bl. 123, Sc.77a <br>
+                Iasi, Romania
+            </address>
+            <a href="tel:+0745332291">+04 745 332 291</a>
+        </div>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
+
+    <script>
+        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+            return new bootstrap.Popover(popoverTriggerEl)
+        })
+    </script>
 </body>
 
 </html>
